@@ -1,0 +1,278 @@
+<title>Interaktivna Mapa Zdravstvenih Ustanova Crne Gore</title>
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet-search@3.0.9/dist/leaflet-search.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    #map {
+        height: 100vh;
+        width: 100%;
+    }
+    
+    .control-panel {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        width: 280px;
+    }
+    
+    .search-container {
+        margin-bottom: 15px;
+    }
+    
+    #searchInput {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+    
+    .filter-group {
+        margin-bottom: 15px;
+    }
+    
+    .filter-group h4 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+    
+    .filter-group label {
+        display: block;
+        margin: 5px 0;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    
+    #locateBtn {
+        width: 100%;
+        padding: 8px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    
+    #locateBtn:hover {
+        background-color: #2980b9;
+    }
+    
+    .legend {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        line-height: 1.5;
+        font-size: 12px;
+    }
+    
+    .legend h4 {
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+    
+    .legend-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 3px;
+    }
+    
+    .legend-color {
+        width: 12px;
+        height: 12px;
+        margin-right: 8px;
+        border: 1px solid #555;
+    }
+    
+    @media (max-width: 768px) {
+        .control-panel {
+            width: 90%;
+            right: 5%;
+            top: 10px;
+            padding: 10px;
+        }
+    }
+</style>
+<div class="control-panel">
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="🔍 Pretraži ustanove...">
+    </div>
+    
+    <div class="filter-group">
+        <h4><i class="fas fa-filter"></i> Filtriraj po kategorijama:</h4>
+        <div id="checkboxGroup"></div>
+    </div>
+    
+    <button id="locateBtn"><i class="fas fa-location-arrow"></i> Moja lokacija</button>
+</div>
+
+<!-- Leaflet & Plugins -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="https://unpkg.com/leaflet-search@3.0.9/dist/leaflet-search.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+<script>
+    // Konfiguracija
+    const config = {
+        categories: {
+            KCCG: { color: '#e74c3c', name: 'Klinički centar' },
+            KBCG: { color: '#3498db', name: 'KBC centri' },
+            DZ: { color: '#2ecc71', name: 'Domovi zdravlja' },
+            OB: { color: '#9b59b6', name: 'Opšte bolnice' },
+            SB: { color: '#f1c40f', name: 'Specijalne bolnice' },
+            JZU: { color: '#1abc9c', name: 'Javne ustanove' }
+        },
+        clusterOptions: {
+            maxClusterRadius: 40,
+            spiderfyOnMaxZoom: true,
+            showCoverageOnHover: false,
+            chunkedLoading: true
+        }
+    };
+
+    // Inicijalizacija mape
+    const map = L.map('map').setView([42.5, 19.3], 8);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    // Klaster grupa
+    const clusters = L.markerClusterGroup(config.clusterOptions);
+    
+    // Grupe markera po kategorijama
+    const markerGroups = {};
+    Object.keys(config.categories).forEach(k => {
+        markerGroups[k] = L.layerGroup();
+    });
+
+    // Generisanje filter checkbox-ova
+    const checkboxGroup = document.getElementById('checkboxGroup');
+    Object.entries(config.categories).forEach(([key, val]) => {
+        checkboxGroup.innerHTML += `
+            <label>
+                <input type="checkbox" class="catCheckbox" value="${key}" checked>
+                <span style="color: ${val.color}">■</span> ${val.name}
+            </label>
+        `;
+    });
+
+    // Učitavanje podataka
+    fetch('ustanove.json')
+        .then(response => response.json())
+        .then(data => {
+            // Dodavanje markera
+            L.geoJSON(data, {
+                pointToLayer: (feature, latlng) => {
+                    return L.circleMarker(latlng, {
+                        radius: 8,
+                        fillColor: config.categories[feature.properties.k].color,
+                        color: "#333",
+                        weight: 1,
+                        fillOpacity: 0.8
+                    });
+                },
+                onEachFeature: (feature, layer) => {
+                    const props = feature.properties;
+                    const category = config.categories[props.k];
+                    
+                    layer.bindPopup(`
+                        <div style="font-size:14px; line-height:1.5;">
+                            <h3 style="margin:0 0 5px;color:${category.color}">${props.n}</h3>
+                            <p><strong>Kategorija:</strong> ${category.name}</p>
+                            <p><strong>Adresa:</strong> ${props.a}</p>
+                            <p><strong>Telefon:</strong> ${props.t}</p>
+                            <p><strong>Radno vrijeme:</strong> ${props.r}</p>
+                            ${props.w ? `<p><strong>Web:</strong> <a href="https://${props.w}" target="_blank">${props.w}</a></p>` : ''}
+                        </div>
+                    `);
+                    
+                    // Dodavanje u odgovarajuću grupu
+                    markerGroups[props.k].addLayer(layer);
+                }
+            }).addTo(clusters);
+            
+            map.addLayer(clusters);
+            updateLayerVisibility();
+            
+            // Inicijalizacija pretrage
+            const searchControl = new L.Control.Search({
+                layer: clusters,
+                propertyName: 'n',
+                marker: false,
+                moveToLocation: function(latlng, title, map) {
+                    map.flyTo(latlng, 13);
+                }
+            });
+            searchControl.on('search:locationfound', function(e) {
+                e.layer.openPopup();
+            });
+            map.addControl(searchControl);
+            
+            // Dodavanje legende
+            const legend = L.control({position: 'bottomright'});
+            legend.onAdd = function() {
+                const div = L.DomUtil.create('div', 'legend');
+                div.innerHTML = '<h4>Legenda</h4>';
+                Object.entries(config.categories).forEach(([key, val]) => {
+                    div.innerHTML += `
+                        <div class="legend-item">
+                            <div class="legend-color" style="background:${val.color}"></div>
+                            <span>${val.name}</span>
+                        </div>
+                    `;
+                });
+                return div;
+            };
+            legend.addTo(map);
+        });
+
+    // Funkcija za ažuriranje vidljivosti slojeva
+    function updateLayerVisibility() {
+        Object.keys(markerGroups).forEach(k => {
+            const checkbox = document.querySelector(`.catCheckbox[value="${k}"]`);
+            if (checkbox.checked) {
+                clusters.addLayer(markerGroups[k]);
+            } else {
+                clusters.removeLayer(markerGroups[k]);
+            }
+        });
+    }
+
+    // Event listeneri za filtere
+    document.querySelectorAll('.catCheckbox').forEach(checkbox => {
+        checkbox.addEventListener('change', updateLayerVisibility);
+    });
+
+    // Geolokacija
+    document.getElementById('locateBtn').addEventListener('click', () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    map.flyTo([position.coords.latitude, position.coords.longitude], 13);
+                },
+                error => {
+                    alert('Došlo je do greške pri lociranju: ' + error.message);
+                }
+            );
+        } else {
+            alert('Geolokacija nije podržana u vašem browseru');
+        }
+    });
+</script>
