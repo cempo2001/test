@@ -1,0 +1,350 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Klinički centar Crne Gore",
+          "k": "KCCG",
+          "a": "Ul. Ljubljanska bb, Podgorica",
+          "t": "020 412 412",
+          "r": "24/7",
+          "w": "kccg.me"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [19.24528, 42.43722]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "KBC Kotor",
+          "k": "KBCG",
+          "a": "Škaljari bb, Kotor",
+          "t": "032 325 602",
+          "r": "24/7",
+          "w": "kbckotor.me"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [18.76407, 42.42041]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "KBC Berane",
+          "k": "KBCG",
+          "a": "Ul. Svetosavska 33, Berane",
+          "t": "051 230 630",
+          "r": "24/7",
+          "w": "bolnicaberane.com"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [19.87420, 42.84650]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Dom zdravlja Podgorica",
+          "k": "DZ",
+          "a": "Ul. Bracana Bracanovića 1, Podgorica",
+          "t": "020 241 000",
+          "r": "07-21h (radnim danima)",
+          "w": "dzpg.me"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [19.26910, 42.45781]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Dom zdravlja Cetinje",
+          "k": "DZ",
+          "a": "Ul. Vuka Mićunovića bb, Cetinje",
+          "t": "041 231 379",
+          "r": "07-21h (radnim danima)",
+          "w": "dzcetinje.me"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [18.92860, 42.38884]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Dom zdravlja Nikšić",
+          "k": "DZ",
+          "a": "Ul. Radoja Dakića bb, Nikšić",
+          "t": "040 231 202",
+          "r": "07-21h (radnim danima)",
+          "w": "domzdravljaniksic.me"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [18.94710, 42.77580]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Dom zdravlja Bar",
+          "k": "DZ",
+          "a": "Ul. Jovana Tomaševića 42, Bar",
+          "t": "030 311 001",
+          "r": "07-21h (radnim danima)",
+          "w": "domzdravljabar.com"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [19.09404, 42.09978]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Dom zdravlja Budva",
+          "k": "DZ",
+          "a": "Ul. Popa Jola Zeca bb, Budva",
+          "t": "033 427 200",
+          "r": "07-21h (radnim danima)",
+          "w": "dzbudva.me"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [18.84250, 42.28700]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Dom zdravlja Tivat",
+          "k": "DZ",
+          "a": "Ul. Istarska bb, Tivat",
+          "t": "032 671 774",
+          "r": "07-21h (radnim danima)",
+          "w": "dztivat.com"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [18.69773, 42.43364]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Dom zdravlja Herceg Novi",
+          "k": "DZ",
+          "a": "Ul. Nikole Ljubibratića 1, Herceg Novi",
+          "t": "031 343 111",
+          "r": "07-21h (radnim danima)",
+          "w": "domzdravljahn.me"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [18.52752, 42.45861]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Opšta bolnica Cetinje 'Danilo I'",
+          "k": "OB",
+          "a": "Ul. Vuka Mićunovića 1, Cetinje",
+          "t": "041 230 441",
+          "r": "24/7",
+          "w": "daniloprvi.me"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [18.92727, 42.38957]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Opšta bolnica Nikšić",
+          "k": "OB",
+          "a": "Ul. Nikca od Rovina bb, Nikšić",
+          "t": "040 231 204",
+          "r": "24/7",
+          "w": "bolnica-nk.com"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [18.94450, 42.77590]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Opšta bolnica Bar",
+          "k": "OB",
+          "a": "Stari Bar, ul. Podgrad bb, Bar",
+          "t": "030 342 333",
+          "r": "24/7",
+          "w": "bolnicabar.me"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [19.13112, 42.08921]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Opšta bolnica Bijelo Polje",
+          "k": "OB",
+          "a": "Ul. Medanovići bb, Bijelo Polje",
+          "t": "050 684 142",
+          "r": "24/7",
+          "w": "bpbolnica.me"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [19.74300, 43.03000]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Opšta bolnica Pljevlja",
+          "k": "OB",
+          "a": "Ul. Vuka Kneževića bb, Pljevlja",
+          "t": "052 300 168",
+          "r": "24/7",
+          "w": "bolnicapv.com"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [19.35173, 43.36036]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Specijalna bolnica za plućne bolesti 'Dr Jovan Bulajić' Brezovik",
+          "k": "SB",
+          "a": "Brezovik bb, Nikšić",
+          "t": "040 217 011",
+          "r": "24/7",
+          "w": "brezovik.me"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [18.92427, 42.81919]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Specijalna bolnica za psihijatriju 'Dobrota' Kotor",
+          "k": "SB",
+          "a": "Ul. Jadranska 118, Dobrota, Kotor",
+          "t": "032 330 920",
+          "r": "24/7",
+          "w": "psihijatrijakotor.com"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [18.75300, 42.45430]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Specijalna bolnica 'Vaso Ćuković' Risan",
+          "k": "SB",
+          "a": "Risan bb, Kotor",
+          "t": "032 371 099",
+          "r": "24/7",
+          "w": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [18.69350, 42.51440]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Institut za javno zdravlje Crne Gore",
+          "k": "JZU",
+          "a": "Ul. Džona Džeksona bb, Podgorica",
+          "t": "020 412 888",
+          "r": "07-15h (radnim danima)",
+          "w": "ijzcg.me"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [19.24731, 42.43795]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Zavod za hitnu medicinsku pomoć Crne Gore",
+          "k": "JZU",
+          "a": "Ul. Vaka Đurovića bb, Podgorica",
+          "t": "020 226 081",
+          "r": "24/7",
+          "w": "hitna.me"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [19.26264, 42.44563]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Zavod za transfuziju krvi Crne Gore",
+          "k": "JZU",
+          "a": "Ul. Ljubljanska bb, Podgorica",
+          "t": "020 240 715",
+          "r": "07-15h (radnim danima)",
+          "w": "ztkcg.me"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [19.24171, 42.43891]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Apoteke Crne Gore 'Montefarm'",
+          "k": "JZU",
+          "a": "Ankarski bulevar 3, Podgorica",
+          "t": "020 405 901",
+          "r": "07-15h (radnim danima)",
+          "w": "montefarm.co.me"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [19.24171, 42.43891]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "n": "Fond za zdravstveno osiguranje Crne Gore",
+          "k": "JZU",
+          "a": "Ul. Vaka Đurovića bb, Podgorica",
+          "t": "020 404 101",
+          "r": "07-15h (radnim danima)",
+          "w": "fzocg.me"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [19.26180, 42.44558]
+        }
+      }
+    ]
+  }
